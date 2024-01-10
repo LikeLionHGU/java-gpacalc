@@ -1,29 +1,39 @@
 package gpacalc;
 
 public enum Grade {
-    A_PLUS(4.5),
-    A_ZERO(4.0),
-    B_PLUS(3.5),
-    B_ZERO(3.0),
-    C_PLUS(2.5),
-    C_ZERO(2.0),
-    D_PLUS(1.5),
-    D_ZERO(1.0),
-    P(0),
-    NP(0),
-    F(0);
-
+    A_PLUS("A+",4.5),
+    A_ZERO("A0",4.0),
+    B_PLUS("B+",3.5),
+    B_ZERO("B0",3.0),
+    C_PLUS("C+",2.5),
+    C_ZERO("C0",2.0),
+    D_PLUS("D+",1.5),
+    D_ZERO("D0",1.0),
+    P("P",0.0),
+    NP("NP",0.0),
+    F("F",0.0);;
+    private final String grade;
     private final double score;
 
-    Grade(double score) {
+    Grade(String grade, double score){
+        this.grade = grade;
         this.score = score;
     }
 
-    public double getScore() {
-        return score;
+    public static Grade of(String grade){
+        for(Grade g : Grade.values()){
+            if(g.grade.equals(grade)){
+                return g;
+            }
+        }
+        throw new IllegalArgumentException("잘못된 성적 입력입니다.");
     }
 
-    public static Grade of(String grade) {
-        return Grade.valueOf(grade);
+    public double getScore(){
+        return this.score;
+    }
+
+    public String getGrade(){
+        return this.grade;
     }
 }
