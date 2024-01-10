@@ -66,7 +66,15 @@ public class GradeCalculator {
         double weightedTotalGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, nonMajorSubjects);// 가중 평점 계산
         int majorGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, new Subject[0]);// 전공 과목 grade 학점 계산
         double weightedMajorGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, new Subject[0]);// 전공 과목 가중 평점 계산
-        average = weightedTotalGrade / totalGradeCredit;// 평점평균 계산
-        majorAverage = weightedMajorGrade / majorGradeCredit;// 전공 평점평균 계산
+        if (totalGradeCredit == 0) {
+            average = 0;
+        }else{
+            average = weightedTotalGrade / totalGradeCredit;// 평점평균 계산
+        }
+        if (majorGradeCredit == 0) {
+            majorAverage = 0;
+        }else{
+            majorAverage = weightedMajorGrade / majorGradeCredit;// 전공 평점평균 계산
+        }
     }
 }
