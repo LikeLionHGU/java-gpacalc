@@ -1,7 +1,7 @@
 package gpacalc;
 
 public class GradeCalculatorUtil {
-    public static int calculateAcquiredCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
+    public static int calculateAcquiredCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {// 취득학점 계산
         int majorCredit = 0;
         int nonMajorCredit = 0;
         for (Subject subject : majorSubjects) {
@@ -13,7 +13,7 @@ public class GradeCalculatorUtil {
         return majorCredit + nonMajorCredit;
     }
 
-    public static int calculateTotalGradeCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
+    public static int calculateTotalGradeCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {// 총 학점 계산
         int majorCredit = 0;
         int nonMajorCredit = 0;
         for (Subject subject : majorSubjects) {
@@ -27,7 +27,7 @@ public class GradeCalculatorUtil {
         return majorCredit + nonMajorCredit;
     }
 
-    public static double calculateWeightedTotalGrade(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
+    public static double calculateWeightedTotalGrade(Subject[] majorSubjects, Subject[] nonMajorSubjects) {// 가중 평점 계산
         double majorTotalGrade = 0;
         double nonMajorTotalGrade = 0;
         for (Subject subject : majorSubjects) {

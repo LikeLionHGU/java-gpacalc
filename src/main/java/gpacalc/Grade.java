@@ -1,6 +1,6 @@
 package gpacalc;
 
-public enum Grade {
+public enum Grade {// 성적 enum 클래스
     A_PLUS("A+",4.5),
     A_ZERO("A0",4.0),
     B_PLUS("B+",3.5),
@@ -11,7 +11,7 @@ public enum Grade {
     D_ZERO("D0",1.0),
     P("P",0.0),
     NP("NP",0.0),
-    F("F",0.0);;
+    F("F",0.0);
     private final String grade;
     private final double score;
 
@@ -20,13 +20,13 @@ public enum Grade {
         this.score = score;
     }
 
-    public static Grade of(String grade){
+    public static Grade of(String grade){// 입력받은 성적에 해당하는 enum 반환
         for(Grade g : Grade.values()){
             if(g.grade.equals(grade)){
                 return g;
             }
         }
-        throw new IllegalArgumentException("잘못된 성적 입력입니다.");
+        throw new IllegalArgumentException("잘못된 성적 입력입니다.");// 잘못된 성적 입력시 예외처리
     }
 
     public double getScore(){

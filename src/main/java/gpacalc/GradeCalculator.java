@@ -1,22 +1,20 @@
 package gpacalc;
-import static camp.nextstep.edu.missionutils.Console.readLine;
 import camp.nextstep.edu.missionutils.Console;
 
 public class GradeCalculator {
     private Subject[] majorSubjects;
     private Subject[] nonMajorSubjects;
-
     private int acquiredCredit;
     private double majorAverage;
     private double average;
 
-    public void run() {
-        inputMajorSubjects();
+    public void run() {// 프로그램 실행
+        inputMajorSubjects();// 전공 과목 입력
         System.out.println();
-        inputNonMajorSubjects();
+        inputNonMajorSubjects();// 교양 과목 입력
         System.out.println();
-        calculate();
-        printData();
+        calculate();// 취득 학점, 평점평균, 전공 평점평균 계산
+        printResult();// 결과 출력
         System.out.println();
 
     }
@@ -43,7 +41,7 @@ public class GradeCalculator {
         }
     }
 
-    private void printData() {
+    private void printResult() {
         System.out.println("<과목 목록>");
         for (Subject subject : majorSubjects) {
             System.out.println("[전공] " + subject.getName() + "," + subject.getCredit() + "," + subject.getGrade().getGrade());
@@ -63,12 +61,12 @@ public class GradeCalculator {
     }
 
     private void calculate() {
-        int totalGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, nonMajorSubjects);
-        acquiredCredit=GradeCalculatorUtil.calculateAcquiredCredit(majorSubjects,nonMajorSubjects);
-        double weightedTotalGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, nonMajorSubjects);
-        int majorGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, new Subject[0]);
-        double weightedMajorGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, new Subject[0]);
-        average = weightedTotalGrade / totalGradeCredit;
-        majorAverage = weightedMajorGrade / majorGradeCredit;
+        int totalGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, nonMajorSubjects);// 총 학점 계산
+        acquiredCredit=GradeCalculatorUtil.calculateAcquiredCredit(majorSubjects,nonMajorSubjects);// 취득 학점 계산
+        double weightedTotalGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, nonMajorSubjects);// 가중 평점 계산
+        int majorGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, new Subject[0]);// 전공 과목 grade 학점 계산
+        double weightedMajorGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, new Subject[0]);// 전공 과목 가중 평점 계산
+        average = weightedTotalGrade / totalGradeCredit;// 평점평균 계산
+        majorAverage = weightedMajorGrade / majorGradeCredit;// 전공 평점평균 계산
     }
 }
