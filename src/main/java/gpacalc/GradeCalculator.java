@@ -6,12 +6,19 @@ public class GradeCalculator {
     private Subject[] majorSubjects;
     private Subject[] nonMajorSubjects;
 
+    private int acquiredCredit;
+    private double majorAverage;
+    private double average;
+
     public void run() {
         inputMajorSubjects();
         System.out.println();
         inputNonMajorSubjects();
         System.out.println();
-        printSubjects();
+        calculate();
+        printData();
+        System.out.println();
+
     }
 
     private void inputMajorSubjects() {
@@ -36,7 +43,7 @@ public class GradeCalculator {
         }
     }
 
-    private void printSubjects() {
+    private void printData() {
         System.out.println("<과목 목록>");
         for (Subject subject : majorSubjects) {
             System.out.println("[전공] " + subject.getName() + "," + subject.getCredit() + "," + subject.getGrade().getGrade());
@@ -44,5 +51,24 @@ public class GradeCalculator {
         for (Subject subject : nonMajorSubjects) {
             System.out.println("[교양] " + subject.getName() + "," + subject.getCredit() + "," + subject.getGrade().getGrade());
         }
+        System.out.println();
+        System.out.println("<취득학점>");
+        System.out.println(acquiredCredit + "학점");
+        System.out.println();
+        System.out.println("<평점평균>");
+        System.out.println(String.format("%.2f", average) + " / 4.5");
+        System.out.println();
+        System.out.println("<전공 평점평균>");
+        System.out.println(String.format("%.2f", majorAverage) + " / 4.5");
+    }
+
+    private void calculate() {
+        int totalGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, nonMajorSubjects);
+        acquiredCredit=GradeCalculatorUtil.calculateAcquiredCredit(majorSubjects,nonMajorSubjects);
+        double weightedTotalGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, nonMajorSubjects);
+        int majorGradeCredit = GradeCalculatorUtil.calculateTotalGradeCredit(majorSubjects, new Subject[0]);
+        double weightedMajorGrade = GradeCalculatorUtil.calculateWeightedTotalGrade(majorSubjects, new Subject[0]);
+        average = weightedTotalGrade / totalGradeCredit;
+        majorAverage = weightedMajorGrade / majorGradeCredit;
     }
 }

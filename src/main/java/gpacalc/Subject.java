@@ -23,4 +23,11 @@ public class Subject {
     public Grade getGrade() {
         return grade;
     }
+
+    public int getAcquiredCredit() {
+        if (grade == Grade.NP || grade == Grade.F) {
+            return 0;
+        }
+        return credit;
+    }
 }
