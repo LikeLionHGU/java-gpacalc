@@ -7,6 +7,12 @@ public class Subject {
     private final Grade grade;
 
     public Subject(String name, int credit, Grade grade) {
+        if (name.length()>10 || name.isBlank()) {
+            throw new IllegalArgumentException("잘못된 과목명 입력입니다.");
+        }
+        if (credit < 1 || credit > 4) {
+            throw new IllegalArgumentException("잘못된 학점 입력입니다.");
+        }
         this.name = name;
         this.credit = credit;
         this.grade = grade;
