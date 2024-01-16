@@ -29,6 +29,7 @@ public class Calculator {
                 checkScoreException(credit);
 
                 calculateTotalScore(infoMaj.get(i + 1));
+                calculateTotalMajorScore(infoMaj.get(i + 1));
                 System.out.print(",");
 
             }
@@ -160,6 +161,11 @@ public class Calculator {
         return moreThanTen;
     }
 
+    public void calculateTotalMajorScore(String lectureType) {
+        if (!lectureType.equals("F") && !lectureType.equals("NP"))
+            majorTotalScore += credit;
+
+    }
 
     public void calculateTotalScore(String lectureType) {
         if (!lectureType.equals("F") && !lectureType.equals("NP"))
@@ -216,8 +222,8 @@ public class Calculator {
     }
 
     public void printSum() {
-        System.out.println("\n <취득 학점>");
-        System.out.println(totalScore + "학점");
+        System.out.println("\n <취득학점>");
+        System.out.println((int)totalScore + "학점");
     }
 
     private void addMajorScore(double score, double r) {
@@ -232,15 +238,15 @@ public class Calculator {
 
     public void printAverageOfAll() {
         double avg = (majorSum + elecSum) / grade;
-        System.out.println("<평점 평균>");
+        System.out.println("<평점평균>");
         System.out.println(String.format("%.2f / 4.5", avg));
 
 
     }
 
     public void printAverageOfMajor() {
-        double major_avg = majorSum / majorTotalScore;
-        System.out.println("<전공 평점 평균>");
+        double major_avg = majorSum / majorTotalScore; //majorTotalScore
+        System.out.println("<전공 평점평균>");
         System.out.println(String.format("%.2f / 4.5", major_avg));
     }
 
