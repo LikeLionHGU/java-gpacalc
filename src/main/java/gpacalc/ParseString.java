@@ -6,15 +6,15 @@ import java.util.List;
 
 public class ParseString {
 
-    public List<String> getSeparated(String a) {
+    public List<String> getSeparated(String wholeInput) {
 
-        String[] spl_one = a.split(",");
+        String[] splFirst = wholeInput.split(",");
         List<String> resultList = new ArrayList<>();
 
 
-        for (String tmp : spl_one) {
-            String[] pro_hyp = tmp.split("-");
-            resultList.addAll(Arrays.asList(pro_hyp));
+        for (String resultSplit : splFirst) {
+            String[] result = resultSplit.split("-");
+            resultList.addAll(Arrays.asList(result));
         }
 
         return resultList;

@@ -26,7 +26,6 @@ public class Application {
         String major_score = input.getMajorInput();
         String elec_score = input.getElectiveInput();
 
-
 //      2.
 
         ParseString parseString = new ParseString();
@@ -42,14 +41,13 @@ public class Application {
 
 //      4.
         calculator.printSum();
-        calculator.printAll();
+        calculator.printAverage();
 
 //데이타구조-3-A0,자바프로그래밍언어-3-B+,컴퓨터구조-3-C0,컴퓨터네트워크-3-D+
 //미술의이해-3-P,교양특론3-1-NP,기독교의이해-2-F
 
 
         System.out.println("=== [System] : 계산이 끝났습니다. ===");
-            System.exit(0);
 
     }
 }
