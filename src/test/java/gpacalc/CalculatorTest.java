@@ -25,8 +25,10 @@ class CalculatorTest {
     @DisplayName("과목명 공백 검사")
     @Test
     void checkNamingException() {
+        //when
         String input="   ";
 
+        //then
         assertThrows(IllegalArgumentException.class, () -> {
             calculator.checkNamingException(input);
         });
@@ -35,6 +37,14 @@ class CalculatorTest {
     @DisplayName("학점 범위 검사")
     @Test
     void checkScoreException() {
+
+        //when
+        int score = 7;
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculator.checkScoreException(score);
+        });
 
     }
 
