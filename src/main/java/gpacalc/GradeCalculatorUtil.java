@@ -1,7 +1,7 @@
 package gpacalc;
 
 public class GradeCalculatorUtil {
-    public static int calculateAcquiredCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {// 취득학점 계산
+    public static int calculateAcquiredCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
         int majorCredit = 0;
         int nonMajorCredit = 0;
         for (Subject subject : majorSubjects) {
@@ -13,7 +13,7 @@ public class GradeCalculatorUtil {
         return majorCredit + nonMajorCredit;
     }
 
-    public static int calculateTotalGradeCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {// 총 학점 계산
+    private static int calculateTotalGradeCredit(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
         int majorCredit = 0;
         int nonMajorCredit = 0;
         for (Subject subject : majorSubjects) {
@@ -27,7 +27,7 @@ public class GradeCalculatorUtil {
         return majorCredit + nonMajorCredit;
     }
 
-    public static double calculateWeightedTotalGrade(Subject[] majorSubjects, Subject[] nonMajorSubjects) {// 가중 평점 계산
+    private static double calculateWeightedTotalGrade(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
         double majorTotalGrade = 0;
         double nonMajorTotalGrade = 0;
         for (Subject subject : majorSubjects) {
@@ -37,5 +37,12 @@ public class GradeCalculatorUtil {
             nonMajorTotalGrade += subject.getGrade().getScore() * subject.getCredit();
         }
         return majorTotalGrade + nonMajorTotalGrade;
+    }
+
+    public static double calculateGPA(Subject[] majorSubjects, Subject[] nonMajorSubjects) {
+        if (calculateTotalGradeCredit(majorSubjects, nonMajorSubjects) == 0) {
+            return 0;
+        }
+        return calculateWeightedTotalGrade(majorSubjects, nonMajorSubjects) / calculateTotalGradeCredit(majorSubjects, nonMajorSubjects);
     }
 }
