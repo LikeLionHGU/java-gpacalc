@@ -73,7 +73,7 @@ public class Subjects {
         return totalCredit;
     }
 
-    public String calculateAverage() {
+    public String calculateAverage() {//
         int totalCredit = 0;
         double totalGrade = 0.0;
         for (Subject subject : subjectList) {
@@ -118,9 +118,9 @@ public class Subjects {
             case "F":
                 return 0.0;
             case "P":
-                return 0.0; // Assuming 'P' is pass with no GPA contribution
+                return 0.0;
             case "NP":
-                return 0.0; // Assuming 'NP' is non-pass with no GPA contribution
+                return 0.0;
             default:
                 return 0.0;
         }
