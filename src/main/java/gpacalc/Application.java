@@ -19,29 +19,34 @@ public class Application {
         // 4. 이쁘게 출력
 
 
-//      1.
+//      1. (완료)
 
 
         Input input = new Input();
         String major_score = input.getMajorInput();
         String elec_score = input.getElectiveInput();
 
-//      2.
+
+//      2. (완료)
 
         ParseString parseString = new ParseString();
         List<String> major_result = parseString.getSeparated(major_score);
         List<String> elec_result = parseString.getSeparated(elec_score);
 
 
-//      3.
+//      3. (완료)
+
         System.out.println("<과목 목록>");
         Calculator calculator = new Calculator();
         calculator.printMajorInput(major_result);
         calculator.printElecInput(elec_result);
 
-//      4.
+//      4. (완료)
+
         calculator.printSum();
-        calculator.printAverage();
+        calculator.printAverageOfAll();
+        calculator.printAverageOfMajor();
+
 
 //데이타구조-3-A0,자바프로그래밍언어-3-B+,컴퓨터구조-3-C0,컴퓨터네트워크-3-D+
 //미술의이해-3-P,교양특론3-1-NP,기독교의이해-2-F

@@ -230,14 +230,16 @@ public class Calculator {
 
     }
 
-    public void printAverage() {
+    public void printAverageOfAll() {
         double avg = (majorSum + elecSum) / grade;
-        double major_avg = majorSum / majorTotalScore;
-
         System.out.println("<평점 평균>");
         System.out.println(String.format("%.2f / 4.5", avg));
 
 
+    }
+
+    public void printAverageOfMajor() {
+        double major_avg = majorSum / majorTotalScore;
         System.out.println("<전공 평점 평균>");
         System.out.println(String.format("%.2f / 4.5", major_avg));
     }
