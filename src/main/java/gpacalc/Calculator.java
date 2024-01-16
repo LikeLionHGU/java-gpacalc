@@ -71,7 +71,6 @@ public class Calculator {
 
             } else {
                 System.out.print(",");
-
             }
         }
     }
