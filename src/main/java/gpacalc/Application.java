@@ -29,12 +29,12 @@ public class Application {
         System.out.println();
 
         System.out.println("<평점평균>");
-        String average = subjects.calculateAverage();
+        String average = subjects.calculateGPA(null);
         System.out.println(average + " / 4.5");
         System.out.println();
 
         System.out.println("<전공 평점평균>");
-        String majorAverage = subjects.calculateAverage("전공");
+        String majorAverage = subjects.calculateGPA("전공");
         System.out.println(majorAverage + " / 4.5");
     }
 }

@@ -2,16 +2,32 @@ package gpacalc;
 
 import java.util.Stack;
 
+import static org.junit.platform.commons.util.StringUtils.isBlank;
+
 public class Subjects {
     Stack<String> stack = new Stack<>();
-    private String[] subjects;
+
     public void input(String subject, String type){
         String subjects[] = subject.split(",");
-        this.subjects = subjects;
         for(int i = 0; i < subjects.length; i++){
             subjects[i] = subjects[i].replace("-", ",");
-            stack.push("[" + type + "] " + subjects[i]);
+            String subjectName = subjects[i].split(",")[0];
+            System.out.println("subjectName: " + subjectName);
+            if(isBlank(subjectName) && isValid(subjectName))
+                stack.push("[" + type + "] " + subjects[i]);
         }
+    }
+    public boolean isBlank(String subjectName){
+        if(subjectName.isBlank()){
+            throw new IllegalArgumentException("과목명은 공백이 될 수 없습니다.");
+        }
+        return true;
+    }
+    public boolean isValid(String subjectName){
+        if(subjectName.length() > 10){
+            throw new IllegalArgumentException("과목명은 10글자 이내로 입력되어야 합니다.");
+        }
+        return true;
     }
     public void print(){
         for(int i = 0; i < stack.size(); i++){
@@ -24,9 +40,7 @@ public class Subjects {
             String info[] = stack.get(i).split(",");
             int credit = Integer.parseInt(info[1]);
             String grade = info[2];
-            if(credit < 1 || credit > 4){
-                throw new IllegalArgumentException("학점은 1~4 사이의 숫자만 가능합니다.");
-            }
+            isValidCredit(credit);
             if(grade.equals("F") == false && grade.equals("NP") == false){
                 result += credit;
             }
@@ -34,10 +48,13 @@ public class Subjects {
         return result;
     }
 
-    public String calculateAverage() {
-        return calculateAverage(null);
+    public void isValidCredit(int credit){
+        if(credit < 1 || credit > 4){
+            throw new IllegalArgumentException("학점은 1~4 사이의 숫자만 가능합니다.");
+        }
     }
-    public String calculateAverage(String type) {
+
+    public String calculateGPA(String type) {
         double result = 0;
         int credit = 0;
         for(int i = 0; i < stack.size(); i++){
@@ -68,7 +85,7 @@ public class Subjects {
                         result += 0.0 * subjectCredit;
                     }
                     else{
-                        throw new IllegalArgumentException("학점은 A+, A0, B+, B0, C+, C0, D+, D0, F, P, NP만 가능합니다.");
+                        throw new IllegalArgumentException("성적은 A+, A0, B+, B0, C+, C0, D+, D0, F, P, NP만 가능합니다.");
                     }
                     credit += subjectCredit;
                 }
@@ -77,6 +94,5 @@ public class Subjects {
         System.out.println("result: " + result + ", credit: " + credit);
         result = result / credit;
         return String.format("%.2f", result);
-
     }
 }
