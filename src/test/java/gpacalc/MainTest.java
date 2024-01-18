@@ -1,11 +1,13 @@
+package gpacalc;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import gpacalc.Application;
+import gpacalc.Main;
 import org.junit.jupiter.api.Test;
 
-public class ApplicationTest extends NsTest {
+public class MainTest extends NsTest {
 
     @Test
     void 평점평균_계산() {
@@ -49,6 +51,6 @@ public class ApplicationTest extends NsTest {
 
     @Override
     protected void runMain() {
-        Application.main(new String[]{});
+        Main.main(new String[]{});
     }
 }
