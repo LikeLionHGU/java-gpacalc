@@ -23,29 +23,32 @@ public class Application {
 
 
         Input input = new Input();
-        String major_score = input.getMajorInput();
-        String elec_score = input.getElectiveInput();
+        String majorScore = input.getMajorInput();
+        String elecScore = input.getElectiveInput();
 
 
 //      2. (완료)
 
         ParseString parseString = new ParseString();
-        List<String> major_result = parseString.getSeparated(major_score);
-        List<String> elec_result = parseString.getSeparated(elec_score);
+        List<String> majorResult = parseString.getSeparated(majorScore);
+        List<String> elecResult = parseString.getSeparated(elecScore);
 
 
 //      3. (완료)
 
         System.out.println("<과목 목록>");
         Calculator calculator = new Calculator();
-        calculator.printMajorInput(major_result);
-        calculator.printElecInput(elec_result);
+        calculator.initializeNumbers();
+        calculator.calculateMajorInputIntoGPA(majorResult);
+        calculator.printMajorInput(majorResult);
+        calculator.calculateElecInputIntoGPA(elecResult);
+        calculator.printElecInput(elecResult);
 
 //      4. (완료)
 
         calculator.printSum();
         calculator.printAverageOfAll();
-        calculator.printAverageOfMajor();
+        calculator.printAverageOfMajor(calculator.calculateMajorInputIntoGPA(majorResult));
 
 
 //데이타구조-3-A0,자바프로그래밍언어-3-B+,컴퓨터구조-3-C0,컴퓨터네트워크-3-D+

@@ -5,14 +5,20 @@ import java.util.List;
 
 public class Calculator {
 
-    double totalScore = 0;
-    double majorTotalScore = 0;
-    double majorSum = 0;
-    double elecSum = 0;
 
-    double grade = 0;
-    double credit;
-    double rate;
+    private double totalScore;
+    private double majorTotalScore;
+    private double majorSum;
+    private double elecSum;
+
+    private double grade;
+    private double credit;
+    private double rate;
+
+    private final int minScore = 1;
+    private final int maxScore = 4;
+
+    private final int maxLength = 10;
 
 
     public void printMajorInput(List<String> infoMaj) {
@@ -22,19 +28,39 @@ public class Calculator {
                 System.out.print("[전공] ");
                 checkNamingException(infoMaj.get(i));
             }
-            System.out.print(infoMaj.get(i));
+            System.out.print(infoMaj.get(i) + ",");
 
             if (i % 3 == 1) {
                 credit = Integer.parseInt(infoMaj.get(i));
                 checkScoreException(credit);
 
-                calculateTotalScore(infoMaj.get(i + 1));
-                calculateTotalMajorScore(infoMaj.get(i + 1));
-                System.out.print(",");
+
+            } else if (i % 3 == 2) {
+                System.out.println();
+                checkRateException(infoMaj.get(i));
+
 
             }
-            else if (i % 3 == 2) {
-                System.out.println();
+        }
+
+    }
+
+    public double calculateMajorInputIntoGPA(List<String> infoMaj) {
+
+
+        for (int i = 0; i < infoMaj.size(); i++) {
+            if (i % 3 == 0) {
+                checkNamingException(infoMaj.get(i));
+            }
+
+
+            if (i % 3 == 1) {
+                credit = Integer.parseInt(infoMaj.get(i));
+                checkScoreException(credit);
+                calculateTotalScore(infoMaj.get(i + 1));
+                calculateTotalMajorScore(infoMaj.get(i + 1));
+            } else if (i % 3 == 2) {
+
                 checkRateException(infoMaj.get(i));
                 if (!infoMaj.get(i).equals("P") && !infoMaj.get(i).equals("NP")) {
                     switch (infoMaj.get(i)) {
@@ -66,17 +92,12 @@ public class Calculator {
                             rate = 0;
                             break;
                     }
-
                     addMajorScore(credit, rate);
                 }
-
-            } else {
-                System.out.print(",");
             }
         }
+        return majorSum / majorTotalScore;
     }
-
-
 
 
     public void printElecInput(List<String> infoElec) {
@@ -86,8 +107,32 @@ public class Calculator {
                 System.out.print("[교양] ");
                 checkNamingException(infoElec.get(i));
             }
-            System.out.print(infoElec.get(i));
+            System.out.print(infoElec.get(i) + ",");
 
+
+
+            if (i % 3 == 1) {
+                credit = Integer.parseInt(infoElec.get(i));
+                checkScoreException(credit);
+
+
+
+
+            } else if (i % 3 == 2) {
+                System.out.println();
+                checkRateException(infoElec.get(i));
+
+            }
+        }
+
+    }
+
+    public double calculateElecInputIntoGPA(List<String> infoElec) {
+
+        for (int i = 0; i < infoElec.size(); i++) {
+            if (i % 3 == 0) {
+                checkNamingException(infoElec.get(i));
+            }
 
             if (i % 3 == 1) {
                 credit = Integer.parseInt(infoElec.get(i));
@@ -95,10 +140,8 @@ public class Calculator {
 
                 calculateTotalScore(infoElec.get(i + 1));
 
-                System.out.print(",");
-
             } else if (i % 3 == 2) {
-                System.out.println();
+
                 checkRateException(infoElec.get(i));
                 if (!infoElec.get(i).equals("P") && !infoElec.get(i).equals("NP")) {
                     switch (infoElec.get(i)) {
@@ -133,17 +176,24 @@ public class Calculator {
 
                     addElecScore(credit, rate);
                 }
-            } else {
-                System.out.print(",");
             }
         }
 
+        return (majorSum + elecSum) / grade;
+    }
+
+    public void initializeNumbers() {
+        setTotalScore(0);
+        setMajorTotalScore(0);
+        setMajorSum(0);
+        setElecSum(0);
+        setGrade(0);
     }
 
     public boolean isRightScore(double userScore) {
         boolean rightScore = true;
 
-        if (userScore < 1 || userScore > 4) {
+        if (userScore < minScore || userScore > maxScore) {
             rightScore = false;
         }
 
@@ -154,7 +204,7 @@ public class Calculator {
     public boolean isWrongInput(String lectureName) {
         boolean moreThanTen = true;
 
-        if (lectureName.isBlank() || lectureName.length() > 10) {
+        if (lectureName.isBlank() || lectureName.length() > maxLength) {
             moreThanTen = false;
         }
 
@@ -223,7 +273,7 @@ public class Calculator {
 
     public void printSum() {
         System.out.println("\n <취득학점>");
-        System.out.println((int)totalScore + "학점");
+        System.out.println((int) totalScore + "학점");
     }
 
     private void addMajorScore(double score, double r) {
@@ -244,10 +294,74 @@ public class Calculator {
 
     }
 
-    public void printAverageOfMajor() {
-        double major_avg = majorSum / majorTotalScore; //majorTotalScore
+    public void printAverageOfMajor(double majorCalculateResult) {
         System.out.println("<전공 평점평균>");
-        System.out.println(String.format("%.2f / 4.5", major_avg));
+        System.out.println(String.format("%.2f / 4.5", majorCalculateResult));
+    }
+
+
+
+
+
+
+
+
+
+
+    public double getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(double totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public double getMajorTotalScore() {
+        return majorTotalScore;
+    }
+
+    public void setMajorTotalScore(double majorTotalScore) {
+        this.majorTotalScore = majorTotalScore;
+    }
+
+    public double getMajorSum() {
+        return majorSum;
+    }
+
+    public void setMajorSum(double majorSum) {
+        this.majorSum = majorSum;
+    }
+
+    public double getElecSum() {
+        return elecSum;
+    }
+
+    public void setElecSum(double elecSum) {
+        this.elecSum = elecSum;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 
 }
